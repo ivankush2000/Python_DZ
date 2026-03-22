@@ -13,7 +13,8 @@ def test_shop():
         driver.get("https://www.saucedemo.com/")
 
         # Авторизация
-        username_field = wait.until(EC.element_to_be_clickable((By.ID, "user-name")))
+        username_field = wait.until(
+            EC.element_to_be_clickable((By.ID, "user-name")))
         username_field.clear()
         username_field.send_keys("standard_user")
 
@@ -46,7 +47,8 @@ def test_shop():
 
         # Проверка итоговой суммы
         total_element = wait.until(
-            EC.presence_of_element_located((By.CLASS_NAME, "summary_total_label"))
+            EC.presence_of_element_located(
+                (By.CLASS_NAME, "summary_total_label"))
         )
         actual_total_text = total_element.text
         expected_total = "Total: $58.29"

@@ -5,10 +5,12 @@ from selenium.webdriver.common.by import By
 def test_form():
     driver = webdriver.Edge()
     try:
-        driver.get("https://bonigarcia.dev/selenium-webdriver-java/data-types.html")
+        driver.get(
+            "https://bonigarcia.dev/selenium-webdriver-java/data-types.html")
 
         # Заполнение полей
-        search_input = driver.find_element(By.CSS_SELECTOR, "[name=first-name]")
+        search_input = driver.find_element(
+            By.CSS_SELECTOR, "[name=first-name]")
         search_input.send_keys("Иван")
         print("✅ First name: Иван")
 
@@ -40,7 +42,8 @@ def test_form():
         search_input.send_keys("Россия")
         print("✅ Country: Россия")
 
-        search_input = driver.find_element(By.CSS_SELECTOR, "[name=job-position]")
+        search_input = driver.find_element(
+            By.CSS_SELECTOR, "[name=job-position]")
         search_input.send_keys("QA")
         print("✅ Job position: QA")
 
@@ -52,7 +55,8 @@ def test_form():
         driver.find_element(By.CSS_SELECTOR, "[type=submit]").click()
 
         # Проверка поля Zip-code (должно быть красным)
-        zip_field = driver.find_element(By.ID, "zip-code").get_attribute("class")
+        zip_field = driver.find_element(
+            By.ID, "zip-code").get_attribute("class")
         print(f"✅ Результат для Zip-code: {zip_field}")
         assert "alert-danger" in zip_field
 
@@ -71,7 +75,8 @@ def test_form():
 
         # Проверка всех остальных полей в цикле
         for item in fields:
-            current_field = driver.find_element(By.ID, item).get_attribute("class")
+            current_field = driver.find_element(
+                By.ID, item).get_attribute("class")
             print(f"✅ Поле {item} имеет класс: {current_field}")
             # Assert теперь внутри цикла — проверяем каждое поле!
             assert "alert-success" in current_field

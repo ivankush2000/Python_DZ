@@ -6,9 +6,10 @@ from selenium.webdriver.support import expected_conditions as EC
 
 def test_calc():
     driver = webdriver.Chrome()
-    
+
     try:
-        driver.get("https://bonigarcia.dev/selenium-webdriver-java/slow-calculator.html")
+        driver.get(
+            "https://bonigarcia.dev/selenium-webdriver-java/slow-calculator.html")
 
         # Устанавливаем задержку
         delay_input = driver.find_element(By.CSS_SELECTOR, "#delay")
@@ -24,7 +25,8 @@ def test_calc():
         # Ждем появления результата (до 50 секунд)
         wait = WebDriverWait(driver, 50)
         wait.until(
-            EC.text_to_be_present_in_element((By.CSS_SELECTOR, ".screen"), "15")
+            EC.text_to_be_present_in_element(
+                (By.CSS_SELECTOR, ".screen"), "15")
         )
 
         # Проверяем итоговое значение
