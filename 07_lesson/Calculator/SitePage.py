@@ -3,36 +3,35 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
-class SitePage():
+class SitePage:
     def __init__(self, driver):
         self.driver = driver
 
-    # Открыть сайт
+    # открыть сайт
     def open_main_page(self):
         self.driver.get(
             "https://bonigarcia.dev/selenium-webdriver-java/slow-calculator.html")
 
     # установить задержку
-    def set_delay(self):
+    def set_delay(self, seconds="45"):
         delay_input = self.driver.find_element(By.ID, "delay")
         delay_input.clear()
-        delay_input.send_keys("45")
+        delay_input.send_keys(seconds)
 
-    # Нажимаем кнопки: 7 + 8 =
+    # нажимаем кнопки: 7 + 8 =
     def click_on(self):
         self.driver.find_element(By.XPATH, "//span[text()='7']").click()
         self.driver.find_element(By.XPATH, "//span[text()='+']").click()
         self.driver.find_element(By.XPATH, "//span[text()='8']").click()
         self.driver.find_element(By.XPATH, "//span[text()='=']").click()
 
-    # Ждем появления результата (до 50 секунд)
-    def expectation(self):
-        wait = WebDriverWait(self.driver, 50)
+    # ждем появления результата (до 50 секунд)
+    def wait_for_result(self, expected_value, timeout=50):
+        wait = WebDriverWait(self.driver, timeout)
         wait.until(EC.text_to_be_present_in_element(
-            (By.CSS_SELECTOR, ".screen"), "15")
+            (By.CSS_SELECTOR, ".screen"), expected_value)
         )
 
-    # Проверяем итоговое значение
-    def total_value(self):
-        result_text = self.driver.find_element(By.CSS_SELECTOR, ".screen").text
-        assert result_text == "15", f"Ожидалось 15, но получили {result_text}"
+    # проверяем итоговое значение
+    def get_total_value(self):
+        return self.driver.find_element(By.CSS_SELECTOR, ".screen").text
